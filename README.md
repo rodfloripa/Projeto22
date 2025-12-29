@@ -30,8 +30,11 @@ ABF_ESP - Quantidade de Caldo
 ABG_ESP - Pureza da Frutose
 
 ABH_ESP - Idade da espécie
+
 ABI_ESP - Sacarose total recuperável
+
 ABL_ESP - Toneladas de ABI_ESP por hectare
+
 ABM_ESP - Quantidade de Frutose redutora
 
 <p><a href="https://github.com/rodfloripa/Projeto22/blob/main/An%C3%A1lise%20Causal%20com%20Dados%20da%20Embrapa-1.pdf">O relatório pode ser acessado aqui</a></p>
