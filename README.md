@@ -4,6 +4,8 @@
 
 <p align="justify">Este relatório apresenta os resultados da análise de um conjunto de dados da Embrapa composto por <b>7.653 registros</b> referentes a experimentos agrícolas. O objetivo principal foi avaliar o impacto de diferentes aditivos e variáveis ambientais na produtividade e na qualidade das fibras das espécies cultivadas.</p>
 
+<p align="justify">Para fazer esta análise com dados observacionais foi utilizada a biblioteca cfml_tools, de machine learning contrafactual: https://github.com/gdmarmerola/cfml_tools O clustering supervisionado desta biblioteca verifica como as mudanças na variável de tratamento refletem nas mudanças no alvo, dados os clusters determinados pelas variáveis que mais impactam o alvo.</p>
+
 <p align="justify"><h3>2. Visão Geral dos Dados</h3></p>
 
 <p align="justify">A base de dados processada abrange uma ampla diversidade experimental, permitindo uma análise estatística robusta:</p>
