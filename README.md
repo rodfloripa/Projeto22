@@ -2,9 +2,11 @@
 
 <p align="justify"><h3>1. Introdução</h3></p>
 
-<p align="justify">Este relatório apresenta os resultados da análise de um conjunto de dados da Embrapa composto por <b>7.653 registros</b> referentes a experimentos agrícolas. O objetivo principal foi avaliar o impacto de diferentes aditivos e variáveis ambientais na produtividade e na qualidade das fibras das espécies cultivadas.</p>
+<p align="justify">Este relatório apresenta os resultados da análise de um conjunto de dados composto por <b>7.653 registros</b> referentes a experimentos agrícolas. O objetivo principal foi avaliar o impacto de diferentes aditivos e variáveis ambientais na produtividade e na qualidade das fibras das espécies cultivadas.</p>
 
-<p align="justify">Para fazer esta análise com dados observacionais foi utilizada a biblioteca cfml_tools, de machine learning contrafactual: https://github.com/gdmarmerola/cfml_tools O clustering supervisionado desta biblioteca verifica como as mudanças na variável de tratamento refletem nas mudanças no alvo, dados os clusters determinados pelas variáveis que mais impactam o alvo.</p>
+<p align="justify">Para fazer esta análise foi utilizada a biblioteca cfml_tools, de machine learning contrafactual: https://github.com/gdmarmerola/cfml_tools
+Esta biblioteca cria um modelo de machine learning com a variável independente,dependente e o tratamento,desta forma podemos entender o efeito do tratamento
+na resposta.</p>
 
 <p align="justify"><h3>2. Visão Geral dos Dados</h3></p>
 
@@ -47,15 +49,24 @@
 <li><b>ABH_ESP:</b> Idade da espécie.</li>
 </ul></p>
 
-<p align="justify"><h3>5. Conclusões e Performance dos Aditivos</h3></p>
+<p align="justify"><h3>5. Matriz de Desempenho dos Aditivos</h3></p>
 
-<p align="justify">A análise final revela que a performance dos aditivos é variável conforme o indicador de sucesso escolhido. A "mágica" da otimização consiste em ajustar o manejo para que o pico de acúmulo de <b>Sacarose Total Recuperável (ABI_ESP)</b> coincida com a máxima eficiência produtiva. Com base nos dados processados, identificamos os aditivos de maior e menor desempenho para as variáveis críticas:</p>
+<p align="justify">A tabela abaixo resume a performance comparativa dos aditivos em relação às quatro variáveis fundamentais do estudo, destacando onde cada tratamento atinge seu ápice ou declínio técnico:</p>
 
-<p align="justify"><ul>
-<li><b>Produtividade (ABE_ESP):</b> O <b>Aditivo 3</b> apresenta o melhor desempenho absoluto em volume, enquanto o <b>Aditivo 1</b> apresenta o pior desempenho nesta métrica.</li>
-<li><b>Quantidade de Fibra (ABC_ESP):</b> O <b>Aditivo 1</b> é o melhor para o desenvolvimento de fibras, apresentando o desempenho superior que o destaca dos demais.</li>
-<li><b>Teor de Sacarose (ABB_ESP):</b> O <b>Aditivo 2</b> demonstrou os melhores índices de concentração de sacarose aparente nos testes realizados.</li>
-<li><b>Sacarose Total Recuperável (ABI_ESP):</b> O <b>Aditivo 2</b> também lidera em eficiência de recuperação tecnológica, sendo o mais indicado para maximizar o valor industrial do caldo.</li>
-</ul></p>
+<center>
 
-<p align="justify">Em suma, os dados indicam que tratamentos que favorecem excessivamente a fibra (como o Aditivo 1) criam um impedimento físico à produtividade volumétrica. Portanto, para operações que visam a extração de açúcar e alta rentabilidade por hectare (ABL_ESP), os Aditivos 2 e 3 são estatisticamente superiores, devendo o Aditivo 1 ser reservado para nichos onde a fibra é o produto principal.</p>
+| Variável Crítica | Descrição Técnica | Melhor Aditivo | Pior Aditivo |
+| --- | --- | --- | --- |
+| **ABE_ESP** | Produtividade Bruta | **Aditivo 3** | Aditivo 1 |
+| **ABC_ESP** | Quantidade de Fibra | **Aditivo 1** | - |
+| **ABB_ESP** | Teor de Sacarose | **Aditivo 2** | - |
+| **ABI_ESP** | Sacarose Total Recuperável | **Aditivo 2** | - |
+
+</center>
+
+<p align="justify"><h3>6. Conclusões e Recomendações</h3></p>
+
+<p align="justify">A análise revela que a performance dos aditivos é variável conforme o indicador de sucesso escolhido. A "mágica" da otimização consiste em ajustar o manejo para que o pico de acúmulo de <b>Sacarose Total Recuperável (ABI_ESP)</b> coincida com a máxima eficiência produtiva. </p>
+
+<p align="justify">Em suma, os dados indicam que tratamentos que favorecem excessivamente a fibra (como o <b>Aditivo 1</b>) criam um impedimento físico à produtividade volumétrica. Portanto, para operações que visam a extração de açúcar e alta rentabilidade por hectare (ABL_ESP), os <b>Aditivos 2 e 3</b> são estatisticamente superiores, devendo o Aditivo 1 ser reservado para nichos onde a fibra é o produto principal.</p>
+
