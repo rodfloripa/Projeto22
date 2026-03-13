@@ -2,7 +2,7 @@
 
 <p align="justify"><h3>1. Introdução</h3></p>
 
-<p align="justify">Este relatório apresenta os resultados da análise de um conjunto de dados composto por <b>7.653 registros</b> referentes a experimentos agrícolas. O objetivo principal foi avaliar o impacto de diferentes aditivos e variáveis ambientais na produtividade e na qualidade das fibras das espécies cultivadas.</p>
+<p align="justify">Este relatório apresenta os resultados da análise de um conjunto de dados da Embrapa composto por <b>7.653 registros</b> referentes a experimentos agrícolas. O objetivo principal foi avaliar o impacto de diferentes aditivos e variáveis ambientais na produtividade e na qualidade das fibras das espécies cultivadas.</p>
 
 <p align="justify"><h3>2. Visão Geral dos Dados</h3></p>
 
