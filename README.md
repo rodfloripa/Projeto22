@@ -5,7 +5,7 @@
 <p align="justify">Este relatório apresenta os resultados da análise de um conjunto de dados composto por <b>7.653 registros</b> referentes a experimentos agrícolas. O objetivo principal foi avaliar o impacto de diferentes aditivos e variáveis ambientais na produtividade e na qualidade das fibras das espécies cultivadas.</p>
 
 <p align="justify">Para fazer esta análise foi utilizada a biblioteca cfml_tools, de machine learning contrafactual: https://github.com/gdmarmerola/cfml_tools
-Esta biblioteca cria um modelo de machine learning com a variável independente,dependente e o tratamento,desta forma podemos entender o efeito do tratamento
+Esta biblioteca cria um modelo de machine learning com as variáveis e o tratamento,desta forma podemos entender o efeito do tratamento
 na resposta.</p>
 
 <p align="justify"><h3>2. Visão Geral dos Dados</h3></p>
