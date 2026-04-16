@@ -10,11 +10,11 @@ na resposta.Pense nele como “Random Forest turbinado pra responder: e se?”
 
 Como funciona, de forma simples
 
-Ele usa árvores/florestas pra criar grupos de pessoas que são “quase gêmeas” nos dados. Aí compara quem recebeu o tratamento vs quem não recebeu dentro do mesmo grupo.
+Ele usa árvores/florestas pra criar grupos de dados que são “quase gêmeas”. Aí compara quem recebeu o tratamento vs quem não recebeu dentro do mesmo grupo.
 
 1. *Treina uma Random Forest* normal com suas variáveis `X` pra prever o resultado `y`
 2. *Pega as folhas da floresta*: cada folha é um cluster de observações parecidas
-3. *Calcula o contrafactual*: pra cada pessoa, ele olha pra folha onde ela caiu e vê qual seria o resultado médio se ela tivesse recebido o tratamento oposto
+3. *Calcula o contrafactual*: pra cada unidadede análise, ele olha pra folha onde ela caiu e vê qual seria o resultado médio se ela tivesse recebido o tratamento oposto
 4. *Diagnóstico*: tem um método `.run_leaf_diagnostics()` pra checar se os grupos estão bem balanceados e se o efeito estimado é confiável </p>
 
 <p align="justify"><h3>2. Visão Geral dos Dados</h3></p>
