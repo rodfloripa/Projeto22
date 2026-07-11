@@ -66,7 +66,7 @@ Este documento apresenta os resultados da análise estatística (Teste de Tukey 
 
 ## Resultados: Comparação de Desempenho (ABE_ESP)
 
-A tabela abaixo destaca as comparações estatisticamente significativas (P < 0.05). A **Diferença Média** representa o ganho ou perda de produtividade em **kg/ha** do aditivo vencedor em relação ao comparado.
+A tabela abaixo destaca as comparações estatisticamente significativas (P < 0.05). A **Diferença Média** representa o ganho ou perda de produtividade em **kg/ha** do aditivo vencedor em relação ao comparado.As variaveis 'ABC_ESP', 'ABB_ESP', 'ABI_ESP' não demonstraram diferença significativa.
 
 | Alvo (y) | Comparação | Diferença Média (kg/ha) | P-Valor | Melhor |
 | :--- | :--- | :--- | :--- | :--- |
