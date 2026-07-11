@@ -52,63 +52,59 @@ Ele usa árvores/florestas pra criar grupos de dados que são “quase gêmeas�
 <li><b>ABH_ESP:</b> Idade da espécie (maturação).</li>
 </ul></p>
 
-<p align="justify"><h3>5. Matriz de Desempenho dos Aditivos (Ajustada)</h3></p>
+<p align="justify"><h3>5. Resultados da Regressão Linear</h3></p>
 
-<p align="justify">A tabela abaixo resume a performance comparativa real extraída das médias preditas no notebook, identificando os líderes em cada categoria crítica:</p>
+<p align="justify">Diferentemente da abordagem baseada em árvores contrafactuais, a regressão linear conseguiu estimar de forma estável o efeito de cada aditivo sobre todas as variáveis de interesse. O modelo utilizou variáveis categóricas codificadas automaticamente por meio de variáveis <i>dummy</i>, permitindo isolar o efeito de cada tratamento enquanto controla simultaneamente os efeitos de região, espécie e demais covariáveis.</p>
+
+<p align="justify">A tabela abaixo resume os aditivos que apresentaram os maiores efeitos estimados para cada variável resposta.</p>
 
 <center>
 
-| Variável Crítica | Descrição Técnica | Melhor Aditivo | Pior Aditivo |
-| --- | --- | --- | --- |
-| **ABE_ESP** | Produtividade Bruta | **Aditivo 0** | Aditivo 1 |
-| **ABC_ESP** | Quantidade de Fibra | **Aditivo 1** | - |
-| **ABB_ESP** | Teor de Sacarose | **Aditivo 2** | - |
-| **ABI_ESP** | Sacarose Total Recuperável | **Aditivo 2** | - |
+| Alvo (y) | Aditivo | Coeficiente (Ganho/Perda) | P-Valor | Tendência |
+|----------|---------|--------------------------:|---------:|-----------|
+| **ABB_ESP** | **E** | **0.4085** | **0.0000** | **Positiva** |
+| **ABC_ESP** | **E** | **0.1965** | **0.0002** | **Positiva** |
+| **ABE_ESP** | **C** | **-324.5999** | **0.0177** | **Negativa** |
+| **ABI_ESP** | **E** | **3.9214** | **0.0000** | **Positiva** |
 
 </center>
 
+<p align="justify">Os resultados mostram que o <b>Aditivo E</b> apresentou o melhor desempenho em três das quatro variáveis analisadas, sempre com elevada significância estatística (<i>p-value</i> inferior a 0,001). Para a variável <b>ABE_ESP</b>, entretanto, o <b>Aditivo C</b> apresentou um efeito negativo significativo, indicando redução da produtividade quando comparado ao tratamento de referência.</p>
 
+<p align="justify"><h3>6. Por que o modelo contrafactual falhou?</h3></p>
 
-<p align="justify"><h3>6. Robustez do Código</h3></p>
+<p align="justify">O modelo <code>cfml_tools</code> (Decision Tree Counterfactual) foi desenvolvido para inferência causal baseada em vizinhanças locais. Esse tipo de abordagem busca encontrar parcelas muito semelhantes que receberam tratamentos diferentes para estimar o efeito causal do tratamento.</p>
 
-### Resumo: 9 pegadinhas que esse código já evita para você
+<p align="justify">Entretanto, os dados utilizados neste estudo apresentaram uma estrutura muito diferente da esperada para esse tipo de algoritmo. A regressão linear mostrou que os efeitos dos tratamentos são predominantemente globais e aproximadamente lineares, enquanto o modelo contrafactual depende da existência de grupos locais suficientemente grandes e balanceados.</p>
 
+### 6.1 Requisito de Suficiência de Vizinhos
 
+<p align="justify">O algoritmo cria árvores de decisão para cada tratamento e tenta dividir continuamente os dados até encontrar grupos homogêneos.</p>
 
-| # | Pegadinha | O que acontece se não tratar | Como o código evita |
-| --- | --- | --- | --- |
-| **1** | **Estouro de Memória** | `MemoryError` em base > 2M linhas | `roda_com_retry`: Reduz amostra e chunk automaticamente até caber. Usa `float32` + `gc.collect()` |
-| **2** | **Viés de Seleção** | Achar que Aditivo é bom, mas só foi usado em fazenda boa | Teste SMD. Alerta se `SMD > 0.1` e salva `teste_balanceamento_SMD.csv` |
-| **3** | **Falta de Overlap** | Comparar Aditivos que nunca foram usados nas mesmas condições | Filtro por Propensity Score. Só usa linhas com chance >10% de receber qualquer aditivo |
-| **4** | **Tipos incorretos** | Modelo acha que `Fase_Cultivo 1,2,3` é número e que 3 é 3x melhor que 1 | Detecção automática Num x Cat. Regra: `nunique <= 20` vira categoria |
-| **5** | **min_sample fixo** | `min_sample` baixo = muito NaN. Alto = overfit | Busca automática: testa de 20 a 300 e para quando NaN < 25% |
-| **6** | **Propensity lento/trava** | Rodar Logistic em 20M de linhas trava o PC | Amostra estratificada + cálculo em `CHUNK_SIZE` adaptativo |
-| **7** | **Desbalanceamento de Aditivos** | Aditivo com 1M linhas domina. Aditivo com 2k linhas não aprende | Amostragem estratificada: pega `FINAL_SAMPLE_PER_TREAT` igual pra cada aditivo |
-| **8** | **RAM acumulando** | Rodar 4 Ys e estourar no 3º pq não limpou a memória | `del` + `gc.collect()` após cada etapa pesada: Propensity, Fit, Predict |
-| **9** | **Mudanças na base** | Adicionar coluna nova ou aditivo novo e ter que reescrever tudo | Só configurar `COVARS` e `TARGETS`. O resto detecta e se adapta sozinho |
+<p align="justify">Como a base possui dezenas de espécies, regiões e combinações experimentais diferentes, muitas folhas das árvores ficaram com poucas observações. Nessas situações o algoritmo não consegue estimar o efeito causal, retornando valores <code>NaN</code>.</p>
 
+### 6.2 Falta de Overlap
 
-### O que você ganha
+<p align="justify">Outra limitação importante é o requisito conhecido como <i>overlap</i>.</p>
 
-1. Robusto.
-2. Auditável.
-3. Decisão pronta.
-4. Granular.
+<p align="justify">Para comparar dois aditivos é necessário existir parcelas semelhantes que tenham recebido tratamentos diferentes. Quando determinada espécie ou região recebe praticamente apenas um único aditivo, não existem pares comparáveis suficientes. O algoritmo então elimina essas observações durante o filtro de Propensity Score, reduzindo drasticamente a quantidade de dados disponíveis para treinamento.</p>
 
-### Checklist antes de rodar
+### 6.3 Diferença entre modelos Globais e Locais
 
-```python
-TARGETS=['ABE_ESP','ABC_ESP','ABB_ESP','ABI_ESP']
-TREATMENT='Aditivo'
-COVARS=['Regiao','Especie','Fase_Cultivo','AREA','ABH_ESP']
-```
+| Regressão Linear | Decision Tree Counterfactual |
+|------------------|-----------------------------|
+| Modelo global | Modelo local |
+| Utiliza todos os dados simultaneamente | Compara apenas vizinhos semelhantes |
+| Robusta para muitas categorias | Sensível à alta dimensionalidade |
+| Funciona bem mesmo sem pares perfeitos | Exige grande quantidade de pares comparáveis |
+| Produz coeficientes estáveis | Pode retornar NaN quando faltam observações |
 
-Depois execute:
+<p align="justify">Em bases agronômicas reais, onde existem dezenas de espécies, regiões e diferentes condições ambientais, é comum ocorrer a chamada <b>Maldição da Dimensionalidade</b>. Nesse cenário, árvores contrafactuais tendem a perder estabilidade, enquanto modelos lineares com variáveis <i>dummy</i>, como os implementados pelo <code>statsmodels</code>, permanecem robustos e estatisticamente consistentes.</p>
 
-`python script.py`
+<p align="justify"><h3>7. Conclusões</h3></p>
 
-<p align="justify"><h3>7. Conclusões e Recomendações Técnicas</h3></p>
+<p align="justify">Os resultados demonstram que a regressão linear foi a abordagem mais adequada para este conjunto de dados. Enquanto o modelo contrafactual apresentou dificuldades para encontrar pares comparáveis devido à elevada quantidade de categorias e ao reduzido overlap entre tratamentos, a regressão conseguiu utilizar toda a informação disponível simultaneamente, produzindo estimativas estáveis e estatisticamente significativas.</p>
 
-<p align="justify">A análise dos dados confirma um <i>trade-off</i> fundamental entre volume e qualidade. O <b>Aditivo 0</b> é o mais indicado para maximizar a produtividade bruta (volume total), enquanto o <b>Aditivo 2</b> apresenta a melhor performance tecnológica para a extração de açúcar (sacarose aparente e recuperável).</p>
+<p align="justify">O <b>Aditivo E</b> destacou-se como o tratamento de melhor desempenho para três dos quatro indicadores avaliados (<b>ABB_ESP</b>, <b>ABC_ESP</b> e <b>ABI_ESP</b>), apresentando efeitos positivos com elevada significância estatística. Em contrapartida, o <b>Aditivo C</b> apresentou efeito negativo significativo sobre <b>ABE_ESP</b>, indicando que sua utilização deve ser analisada com cautela quando o objetivo for maximizar a produtividade.</p>
 
-<p align="justify">Em contraste, o <b>Aditivo 1</b>, apesar de ser o melhor para a <b>Quantidade de Fibra (ABC_ESP)</b>, é o que apresenta o pior desempenho em produtividade, reduzindo drasticamente o volume colhido. Portanto, o uso do Aditivo 1 deve ser estritamente limitado a cultivos onde a fibra é o subproduto de maior interesse comercial. Para otimização de rentabilidade industrial por hectare, o foco deve recair sobre os <b>Aditivos 0 e 2</b>.</p>
+<p align="justify">Do ponto de vista metodológico, este estudo evidencia que modelos estatísticos clássicos continuam sendo uma excelente escolha para bases agronômicas de alta dimensionalidade, oferecendo maior estabilidade, interpretabilidade e confiabilidade na estimativa dos efeitos dos tratamentos do que abordagens baseadas exclusivamente em árvores contrafactuais.</p>
