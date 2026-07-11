@@ -60,9 +60,6 @@ Ele usa árvores/florestas pra criar grupos de dados que são “quase gêmeas�
 
 <center>
 
-# Análise de Impacto de Aditivos Agronômicos
-
-Este documento apresenta os resultados da análise estatística (Teste de Tukey HSD) comparando a eficácia de diferentes aditivos na produtividade das culturas.
 
 ## Resultados: Comparação de Desempenho (ABE_ESP)
 
