@@ -73,16 +73,20 @@ Ele usa árvores/florestas pra criar grupos de dados que são “quase gêmeas�
 
 ### Resumo: 9 pegadinhas que esse código já evita para você
 
+
+
 | # | Pegadinha | O que acontece se não tratar | Como o código evita |
-|---|---|---|---|
-|1|**Estouro de Memória**|MemoryError em bases grandes|Retry automático, redução de amostra, float32 e gc.collect()|
-|2|**Viés de Seleção**|Conclusões incorretas|Teste SMD e alerta quando SMD > 0.1|
-|3|**Falta de Overlap**|Comparações injustas|Filtro por Propensity Score|
-|4|**Tipos incorretos**|Modelo interpreta categorias como números|Detecção automática de tipos|
-|5|**min_sample fixo**|NaN ou overfitting|Busca automática do melhor valor|
-|6|**Desbalanceamento de Aditivos**|Modelo favorece grupos maiores|Amostragem estratificada|
-|7|**RAM acumulando**|Estouro de memória após várias execuções|del + gc.collect()|
-|8|**Mudanças na base**|Necessidade de reescrever código|Configuração baseada em COVARS e TARGETS|
+| --- | --- | --- | --- |
+| **1** | **Estouro de Memória** | `MemoryError` em base > 2M linhas | `roda_com_retry`: Reduz amostra e chunk automaticamente até caber. Usa `float32` + `gc.collect()` |
+| **2** | **Viés de Seleção** | Achar que Aditivo é bom, mas só foi usado em fazenda boa | Teste SMD. Alerta se `SMD > 0.1` e salva `teste_balanceamento_SMD.csv` |
+| **3** | **Falta de Overlap** | Comparar Aditivos que nunca foram usados nas mesmas condições | Filtro por Propensity Score. Só usa linhas com chance >10% de receber qualquer aditivo |
+| **4** | **Tipos incorretos** | Modelo acha que `Fase_Cultivo 1,2,3` é número e que 3 é 3x melhor que 1 | Detecção automática Num x Cat. Regra: `nunique <= 20` vira categoria |
+| **5** | **min_sample fixo** | `min_sample` baixo = muito NaN. Alto = overfit | Busca automática: testa de 20 a 300 e para quando NaN < 25% |
+| **6** | **Propensity lento/trava** | Rodar Logistic em 20M de linhas trava o PC | Amostra estratificada + cálculo em `CHUNK_SIZE` adaptativo |
+| **7** | **Desbalanceamento de Aditivos** | Aditivo com 1M linhas domina. Aditivo com 2k linhas não aprende | Amostragem estratificada: pega `FINAL_SAMPLE_PER_TREAT` igual pra cada aditivo |
+| **8** | **RAM acumulando** | Rodar 4 Ys e estourar no 3º pq não limpou a memória | `del` + `gc.collect()` após cada etapa pesada: Propensity, Fit, Predict |
+| **9** | **Mudanças na base** | Adicionar coluna nova ou aditivo novo e ter que reescrever tudo | Só configurar `COVARS` e `TARGETS`. O resto detecta e se adapta sozinho |
+
 
 ### O que você ganha
 
