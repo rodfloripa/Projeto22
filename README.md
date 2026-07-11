@@ -60,16 +60,31 @@ Ele usa árvores/florestas pra criar grupos de dados que são “quase gêmeas�
 
 <center>
 
-| Alvo (y) | Aditivo | Coeficiente (Ganho/Perda) | P-Valor | Tendência |
-|----------|---------|--------------------------:|---------:|-----------|
-| **ABB_ESP** | **E** | **0.40 %** | **0.00** | **Positiva** |
-| **ABC_ESP** | **E** | **0.19 %** | **0.00** | **Positiva** |
-| **ABE_ESP** | **C** | **-324.59 kg/ha** | **0.01** | **Negativa** |
-| **ABI_ESP** | **E** | **3.92 indice ou ppm** | **0.00** | **Positiva** |
+# Análise de Impacto de Aditivos Agronômicos
+
+Este documento apresenta os resultados da análise estatística (Teste de Tukey HSD) comparando a eficácia de diferentes aditivos na produtividade das culturas.
+
+## Resultados: Comparação de Desempenho (ABE_ESP)
+
+A tabela abaixo destaca as comparações estatisticamente significativas (P < 0.05). A **Diferença Média** representa o ganho ou perda de produtividade em **kg/ha** do aditivo vencedor em relação ao comparado.
+
+| Alvo (y) | Comparação | Diferença Média (kg/ha) | P-Valor | Melhor |
+| :--- | :--- | :--- | :--- | :--- |
+| ABE_ESP | B vs I | 1473.82 | 0.00 | I |
+| ABE_ESP | C vs I | 1218.09 | 0.00 | I |
+| ABE_ESP | D vs E | 1046.72 | 0.05 | E |
+| ABE_ESP | D vs I | 1636.54 | 0.00 | I |
+
+---
+
+### Notas Metodológicas
+* **Metodologia:** Regressão Linear robusta seguida de Teste de Comparações Múltiplas (Tukey HSD).
+* **Unidade:** kg/ha (Quilogramas por hectare).
+* **Significância:** Resultados com P-valor < 0.05 indicam que a diferença de produtividade é estatisticamente robusta e não resultante de variação aleatória.
+* **Leitura:** O valor na coluna "Melhor" indica qual aditivo apresentou o maior rendimento médio na comparação direta.
 
 </center>
 
-<p align="justify">Os resultados mostram que o <b>Aditivo E</b> apresentou o melhor desempenho em três das quatro variáveis analisadas, sempre com elevada significância estatística (<i>p-value</i> inferior a 0,001). Para a variável <b>ABE_ESP</b>, entretanto, o <b>Aditivo C</b> apresentou um efeito negativo significativo, indicando redução da produtividade quando comparado ao tratamento de referência.</p>
 
 <p align="justify"><h3>6. Por que o modelo contrafactual falhou?</h3></p>
 
@@ -105,6 +120,5 @@ Ele usa árvores/florestas pra criar grupos de dados que são “quase gêmeas�
 
 <p align="justify">Os resultados demonstram que a regressão linear foi a abordagem mais adequada para este conjunto de dados. Enquanto o modelo contrafactual apresentou dificuldades para encontrar pares comparáveis devido à elevada quantidade de categorias e ao reduzido overlap entre tratamentos, a regressão conseguiu utilizar toda a informação disponível simultaneamente, produzindo estimativas estáveis e estatisticamente significativas.</p>
 
-<p align="justify">O <b>Aditivo E</b> destacou-se como o tratamento de melhor desempenho para três dos quatro indicadores avaliados (<b>ABB_ESP</b>, <b>ABC_ESP</b> e <b>ABI_ESP</b>), apresentando efeitos positivos com elevada significância estatística. Em contrapartida, o <b>Aditivo C</b> apresentou efeito negativo significativo sobre <b>ABE_ESP</b>, indicando que sua utilização deve ser analisada com cautela quando o objetivo for maximizar a produtividade.</p>
 
 <p align="justify">Do ponto de vista metodológico, este estudo evidencia que modelos estatísticos clássicos continuam sendo uma excelente escolha para bases agronômicas de alta dimensionalidade, oferecendo maior estabilidade, interpretabilidade e confiabilidade na estimativa dos efeitos dos tratamentos do que abordagens baseadas exclusivamente em árvores contrafactuais.</p>
