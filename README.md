@@ -62,10 +62,10 @@ Ele usa árvores/florestas pra criar grupos de dados que são “quase gêmeas�
 
 | Alvo (y) | Aditivo | Coeficiente (Ganho/Perda) | P-Valor | Tendência |
 |----------|---------|--------------------------:|---------:|-----------|
-| **ABB_ESP** | **E** | **0.4085** | **0.0000** | **Positiva** |
-| **ABC_ESP** | **E** | **0.1965** | **0.0002** | **Positiva** |
-| **ABE_ESP** | **C** | **-324.5999** | **0.0177** | **Negativa** |
-| **ABI_ESP** | **E** | **3.9214** | **0.0000** | **Positiva** |
+| **ABB_ESP** | **E** | **0.40** | **0.00** | **Positiva** |
+| **ABC_ESP** | **E** | **0.19** | **0.00** | **Positiva** |
+| **ABE_ESP** | **C** | **-324.59** | **0.01** | **Negativa** |
+| **ABI_ESP** | **E** | **3.92** | **0.00** | **Positiva** |
 
 </center>
 
