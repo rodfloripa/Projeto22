@@ -72,7 +72,7 @@ A tabela abaixo destaca as comparações estatisticamente significativas (P < 0.
 | :--- | :--- | :--- | :--- | :--- |
 | ABE_ESP | B vs I | 1473.82 | 0.00 | I |
 | ABE_ESP | C vs I | 1218.09 | 0.00 | I |
-| ABE_ESP | D vs E | 1046.72 | 0.05 | E |
+| ABE_ESP | D vs E | 1046.72 | 0.04 | E |
 | ABE_ESP | D vs I | 1636.54 | 0.00 | I |
 
 ---
