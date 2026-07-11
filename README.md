@@ -54,7 +54,7 @@ Ele usa árvores/florestas pra criar grupos de dados que são “quase gêmeas�
 
 <p align="justify"><h3>5. Resultados da Regressão Linear</h3></p>
 
-<p align="justify">Diferentemente da abordagem baseada em árvores contrafactuais, a regressão linear conseguiu estimar de forma estável o efeito de cada aditivo sobre todas as variáveis de interesse. O modelo utilizou variáveis categóricas codificadas automaticamente por meio de variáveis <i>dummy</i>, permitindo isolar o efeito de cada tratamento enquanto controla simultaneamente os efeitos de região, espécie e demais covariáveis.</p>
+<p align="justify">O cfml tools falhou , como pode ser visto no Jupyter notebook.  Diferentemente da abordagem baseada em árvores contrafactuais, a regressão linear conseguiu estimar de forma estável o efeito de cada aditivo sobre todas as variáveis de interesse. O modelo utilizou variáveis categóricas codificadas automaticamente por meio de variáveis <i>dummy</i>, permitindo isolar o efeito de cada tratamento enquanto controla simultaneamente os efeitos de região, espécie e demais covariáveis.</p>
 
 <p align="justify">A tabela abaixo resume os aditivos que apresentaram os maiores efeitos estimados para cada variável resposta.</p>
 
