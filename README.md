@@ -56,12 +56,6 @@ Ele usa árvores/florestas pra criar grupos de dados que são “quase gêmeas�
 
 <p align="justify">O cfml tools falhou , como pode ser visto no Jupyter notebook.  Diferentemente da abordagem baseada em árvores contrafactuais, a regressão linear conseguiu estimar de forma estável o efeito de cada aditivo sobre todas as variáveis de interesse. O modelo utilizou variáveis categóricas codificadas automaticamente por meio de variáveis <i>dummy</i>, permitindo isolar o efeito de cada tratamento enquanto controla simultaneamente os efeitos de região, espécie e demais covariáveis.</p>
 
-<p align="justify">A tabela abaixo resume os aditivos que apresentaram os maiores efeitos estimados para cada variável resposta.</p>
-
-<center>
-
-
-## Resultados: Comparação de Desempenho (ABE_ESP)
 
 A tabela abaixo destaca as comparações estatisticamente significativas (P < 0.05). A **Diferença Média** representa o ganho ou perda de produtividade em **kg/ha** do aditivo vencedor em relação ao comparado.As variaveis 'ABC_ESP', 'ABB_ESP', 'ABI_ESP' não demonstraram diferença significativa.
 
